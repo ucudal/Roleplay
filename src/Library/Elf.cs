@@ -34,7 +34,7 @@ namespace Library
         public void Attacking(Elf elf)
         {
             int totalDamage = 0;
-            bool isAlive = elf.IsAlive();
+            if(this.IsAlive ||)
             
         }
     }
