@@ -6,7 +6,7 @@ namespace Library
     public class Wizard
     {
         private int InitialHealth {get; set;}
-        public int HP {get; private set;}
+        public int HP {get; set;}
         public int Ataque {get; private set;}
         public int Defensa {get; private set;}
         public SpellBook SpellBook {get; private set;}
