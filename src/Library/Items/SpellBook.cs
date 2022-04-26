@@ -11,5 +11,10 @@ namespace Library
             this.Ataque += spell.Ataque;
             this.Defensa += spell.Defensa;
         }
+
+        public bool EstaRoto()
+        {
+            return this.Durabilidad <= 0;
+        }
     }
 }

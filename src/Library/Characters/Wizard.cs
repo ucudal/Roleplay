@@ -1,17 +1,20 @@
 using System;
+using System.Collections.Generic;
 
 namespace Library
 {
     public class Wizard
     {
+        private int InitialHealth {get; set;}
         public int HP {get; private set;}
-        public int Ataque {get; set;}
-        public int Defensa {get; set;}
+        public int Ataque {get; private set;}
+        public int Defensa {get; private set;}
         public SpellBook SpellBook {get; private set;}
-        public Staff Staff {get; private set;}
+        public List<Item> Items {get;} = new List<Item>();
 
         public Wizard(int hp, int ataque, int defensa)
         {
+            this.InitialHealth = hp;
             this.HP = hp;
             this.Ataque = ataque;
             this.Defensa = defensa;
@@ -37,19 +40,20 @@ namespace Library
             this.Defensa = Math.Max(0, this.Defensa-this.SpellBook.Defensa);
         }      
         
-        public void AddStaff(Staff staff)
+        public void AddItem(Item item)
         {
-            if(this.Staff != null) RemoveStaff();
-            this.Staff = staff;
-            this.Ataque += staff.Ataque;
-            this.Defensa += staff.Defensa;
+            if(this.Items.Contains(item)) return;
+            this.Items.Add(item);
+            this.Ataque += item.Daño;
+            this.Defensa += item.Defensa;
         }
 
-        public void RemoveStaff()
+        public void RemoveItem(Item item)
         {
-            if(this.Staff == null) return;
-            this.Ataque = Math.Max(0, this.Ataque-this.Staff.Ataque);
-            this.Defensa = Math.Max(0, this.Defensa-this.Staff.Defensa);
+            if(!this.Items.Contains(item)) return;
+            this.Items.Remove(item);
+            this.Ataque = Math.Max(0, this.Ataque-item.Daño);
+            this.Defensa = Math.Max(0, this.Defensa-item.Defensa);
         }
 
         public void Attack(Wizard wizard)
@@ -64,12 +68,12 @@ namespace Library
                     RemoveSpellBook();
                 }
             }
-            if(this.Staff != null)
+            foreach(Item item in this.Items)
             {
-                this.Staff.Durabilidad -= 5;
-                if(this.Staff.Durabilidad <= 0)
+                item.Desgaste(1);
+                if(item.Durabilidad <= 0)
                 {
-                    RemoveStaff();
+                    RemoveItem(item);
                 }
             }
         }
