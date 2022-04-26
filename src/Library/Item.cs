@@ -1,12 +1,12 @@
 namespace Library
 {
-    public class Items
+    public class Item
     {
         public int damage { get; private set; } = 0;
         public int defense { get; private set; } = 0;
         public int durability { get; private set; } = 0;
 
-        public Items(int damage, int defense, int durability)
+        public Item(int damage, int defense, int durability)
         {
             this.damage = damage;
             this.defense = defense;

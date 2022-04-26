@@ -1,31 +1,41 @@
 using System;
+using System.Collections.Generic;
 namespace Library
 {
-    public class Elves
+    public class Elf
     {
         public string Name { get; private set; }
         public int Attack { get; private set; } = 0;
-        public Items Item { get; private set; }
+        public List<Item> Items { get; private set; } = new List<Item>();
         public int Health { get; private set; } = 0;
         public int InitialHealth { get; private set; } = 0;
 
-        public Elves (string name, int attack, Items item, int health)
+        public Elf (string name, int attack, Item item, int health)
         {
             this.InitialHealth = health;
             this.Name = name;
             this.Attack = attack;
-            this.Item = item;
             this.Health = health;
         }
 
+        public void AddItem (Item item)
+        {
+            if (!this.Items.Contains(item)){ this.Items.Add(item); }
+        }
+        public bool IsAlive()
+        {
+            return this.Health > 0;
+        }
         public void Heal(int amount)
         {
             this.Health = Math.Max(amount, this.InitialHealth);
         }
 
-        public void Attacking()
+        public void Attacking(Elf elf)
         {
-
+            int totalDamage = 0;
+            bool isAlive = elf.IsAlive();
+            
         }
     }
 }
