@@ -4,18 +4,18 @@ namespace Library
 {
     public class Elf
     {
-        public string Name { get; private set; }
-        public int Attack { get; private set; } = 0;
+        public string Nombre { get; private set; }
+        public int Ataque { get; private set; } = 0;
         public List<Item> Items { get; private set; } = new List<Item>();
-        public int Health { get; private set; } = 0;
-        public int InitialHealth { get; private set; } = 0;
+        public int HP { get; private set; } = 0;
+        public int VidaInicial { get; private set; } = 0;
 
-        public Elf (string name, int attack, Item item, int health)
+        public Elf (string name, int attack, int health)
         {
-            this.InitialHealth = health;
-            this.Name = name;
-            this.Attack = attack;
-            this.Health = health;
+            this.VidaInicial = health;
+            this.Nombre = name;
+            this.Ataque = attack;
+            this.HP = health;
         }
 
         public void AddItem (Item item)
@@ -24,11 +24,11 @@ namespace Library
         }
         public bool IsAlive()
         {
-            return this.Health > 0;
+            return this.HP > 0;
         }
         public void Heal(int amount)
         {
-            this.Health = Math.Max(amount, this.InitialHealth);
+            this.HP = Math.Max(amount, this.VidaInicial);
         }
 
         public void Attacking(Elf elf)
