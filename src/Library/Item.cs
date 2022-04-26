@@ -2,24 +2,24 @@ namespace Library
 {
     public class Item
     {
-        public int damage { get; private set; } = 0;
-        public int defense { get; private set; } = 0;
-        public int durability { get; private set; } = 0;
+        public int daño { get; private set; } = 0;
+        public int defensa { get; private set; } = 0;
+        public int durabilidad { get; private set; } = 0;
 
         public Item(int damage, int defense, int durability)
         {
-            this.damage = damage;
-            this.defense = defense;
-            this.durability = durability;
+            this.daño = damage;
+            this.defensa = defense;
+            this.durabilidad = durability;
         }
 
         public bool EstaRoto()
         {
-            return this.durability <= 0;
+            return this.durabilidad <= 0;
         }
         public void Desgaste(int amount)
         {
-            if(!this.EstaRoto()) { this.durability--; }
+            if(!this.EstaRoto()) { this.durabilidad--; }
         }
     }
 }
