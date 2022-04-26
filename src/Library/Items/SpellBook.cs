@@ -16,5 +16,9 @@ namespace Library
         {
             return this.Durabilidad <= 0;
         }
+        public void Desgaste(int amount)
+        {
+            if(!this.EstaRoto()) { this.Durabilidad--; }
+        }
     }
 }
