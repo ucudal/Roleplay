@@ -12,5 +12,14 @@ namespace Library
             this.defense = defense;
             this.durability = durability;
         }
+
+        public bool EstaRoto()
+        {
+            return this.durability <= 0;
+        }
+        public void Desgaste(int amount)
+        {
+            if(!this.EstaRoto()) { this.durability--; }
+        }
     }
 }
