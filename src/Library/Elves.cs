@@ -5,11 +5,11 @@ namespace Library
     {
         public string Name { get; private set; }
         public int Attack { get; private set; } = 0;
-        public Item Item { get; private set; }
+        public Items Item { get; private set; }
         public int Health { get; private set; } = 0;
         public int InitialHealth { get; private set; } = 0;
 
-        public Elves (string name, int attack, Item item, int health)
+        public Elves (string name, int attack, Items item, int health)
         {
             this.InitialHealth = health;
             this.Name = name;
@@ -23,9 +23,9 @@ namespace Library
             this.Health = Math.Max(amount, this.InitialHealth);
         }
 
-        public void Attack()
+        public void Attacking()
         {
-            
+
         }
     }
 }
