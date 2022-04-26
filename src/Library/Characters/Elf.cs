@@ -22,20 +22,36 @@ namespace Library
         {
             if (!this.Items.Contains(item)){ this.Items.Add(item); }
         }
+        public void RemoveItem (Item item)
+        {
+            if (this.Items.Contains(item)){ this.Items.Remove(item); }
+        }
         public bool IsAlive()
         {
             return this.HP > 0;
         }
-        public void Heal(int amount)
+        public void Heal(Elf character, int amount)
         {
-            this.HP = Math.Max(amount, this.VidaInicial);
+            character.HP = Math.Max(amount, character.VidaInicial);
         }
 
         public void Attacking(Elf elf)
         {
             int totalDamage = 0;
-            if(this.IsAlive ||)
-            
+            if(this.IsAlive() && elf.IsAlive()) 
+            {
+                totalDamage = this.Ataque;
+                foreach(Item item in this.Items)
+                {
+                    if(!item.EstaRoto())
+                    {
+                        item.Desgaste();
+                        totalDamage += item.Daño;
+                    }
+                    else { this.RemoveItem(item); }
+                }
+                elf.HP -= totalDamage;
+            }
         }
     }
 }
