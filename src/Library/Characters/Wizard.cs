@@ -59,11 +59,25 @@ namespace Library
         public void Attack(Wizard wizard)
         {
             if(!wizard.IsAlive() || !this.IsAlive()) return;
+            if(this.SpellBook != null)
+            {
+                if(this.SpellBook.EstaRoto())
+                {
+                    RemoveSpellBook();
+                }
+            }
+            foreach(Item item in this.Items)
+            {
+                if(item.EstaRoto())
+                {
+                    RemoveItem(item);
+                }
+            }
             wizard.HP = wizard.HP - this.Ataque;
             if(this.SpellBook != null)
             {
                 this.SpellBook.Durabilidad -= 5;
-                if(this.SpellBook.Durabilidad <= 0)
+                if(this.SpellBook.EstaRoto())
                 {
                     RemoveSpellBook();
                 }
@@ -71,7 +85,7 @@ namespace Library
             foreach(Item item in this.Items)
             {
                 item.Desgaste(1);
-                if(item.Durabilidad <= 0)
+                if(item.EstaRoto())
                 {
                     RemoveItem(item);
                 }
