@@ -84,7 +84,7 @@ namespace Library
             }
             foreach(Item item in this.Items)
             {
-                item.Desgaste(1);
+                item.Desgaste();
                 if(item.EstaRoto())
                 {
                     RemoveItem(item);
