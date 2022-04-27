@@ -6,6 +6,7 @@ namespace Library
     {
         public string Nombre { get; private set; }
         public int Ataque { get; private set; } = 0;
+        public int Defensa { get; private set; } = 0;
         public List<Item> Items { get; private set; } = new List<Item>();
         public int HP { get; set; } = 0;
         public int VidaInicial { get; private set; } = 0;
@@ -18,6 +19,31 @@ namespace Library
             this.HP = health;
         }
 
+        public int GetAtaque()
+        {
+            int ataqueTotal = this.Ataque;
+            foreach(Item item in this.Items) 
+            {
+                if(!item.EstaRoto())
+                {
+                    ataqueTotal += item.Daño;
+                } 
+            }
+            return ataqueTotal;
+        }
+
+        public int GetDefensa()
+        {
+            int defensaTotal = this.Defensa;
+            foreach(Item item in this.Items) 
+            {
+                if(!item.EstaRoto())
+                {
+                    defensaTotal += item.Defensa;
+                } 
+            }
+            return defensaTotal;
+        }
         public void AddItem (Item item)
         {
             if (!this.Items.Contains(item)){ this.Items.Add(item); }
@@ -47,7 +73,7 @@ namespace Library
 
         public void Attacking(Elf character)
         {
-            int totalDamage = 0;
+            int totalDamage = this.GetAtaque() - this.GetDefensa();
             if(this.IsAlive() && character.IsAlive()) 
             {
                 totalDamage = this.Ataque;
@@ -56,7 +82,6 @@ namespace Library
                     if(!item.EstaRoto())
                     {
                         item.Desgaste();
-                        totalDamage += item.Daño;
                     }
                     else { this.RemoveItem(item); }
                 }
@@ -64,7 +89,6 @@ namespace Library
                 {
                     if(!item.EstaRoto())
                     {
-                        totalDamage -= item.Defensa;
                         item.Desgaste();
                     }
                     else { character.RemoveItem(item); }
@@ -75,7 +99,7 @@ namespace Library
 
         public void Attacking(Wizard character)
         {
-            int totalDamage = 0;
+            int totalDamage = this.GetAtaque() - this.GetDefensa();
             if(this.IsAlive() && character.IsAlive()) 
             {
                 totalDamage = this.Ataque;
@@ -84,7 +108,6 @@ namespace Library
                     if(!item.EstaRoto())
                     {
                         item.Desgaste();
-                        totalDamage += item.Daño;
                     }
                     else { this.RemoveItem(item); }
                 }
@@ -92,7 +115,6 @@ namespace Library
                 {
                     if(!item.EstaRoto())
                     {
-                        totalDamage -= item.Defensa;
                         item.Desgaste();
                     }
                     else { character.RemoveItem(item); }
@@ -103,7 +125,7 @@ namespace Library
 
         public void Attacking(Duende character)
         {
-            int totalDamage = 0;
+            int totalDamage = this.GetAtaque() - this.GetDefensa();
             if(this.IsAlive() && character.IsAlive()) 
             {
                 totalDamage = this.Ataque;
@@ -112,7 +134,6 @@ namespace Library
                     if(!item.EstaRoto())
                     {
                         item.Desgaste();
-                        totalDamage += item.Daño;
                     }
                     else { this.RemoveItem(item); }
                 }
@@ -120,7 +141,6 @@ namespace Library
                 {
                     if(!item.EstaRoto())
                     {
-                        totalDamage -= item.Defensa;
                         item.Desgaste();
                     }
                     else { character.RemoveItem(item); }
