@@ -86,7 +86,32 @@ namespace Library
         public void Attack(Wizard wizard)
         {
             if(!wizard.IsAlive() || !this.IsAlive()) return;
-            wizard.HP = wizard.HP - this.BaseAtaque;
+            wizard.ReceiveAttack(this.Ataque);
+            //Los items que tengan atributos de ataque se desgastan
+            if(this.SpellBook != null && this.SpellBook.Ataque != 0)
+            {
+                this.SpellBook.Desgaste(1);
+            }
+            if(this.Staff != null && this.Staff.Ataque != 0)
+            {
+                this.Staff.Desgaste(1);
+            }
+            CalcularAtributos();
+        }
+
+        public void ReceiveAttack(int damage)
+        {
+            if(!IsAlive()) return;
+            this.HP -= damage - this.Defensa;
+            //Los items que tengan atributos de defensa se desgastan
+            if(this.SpellBook != null && this.SpellBook.Defensa != 0)
+            {
+                this.SpellBook.Desgaste(1);
+            }
+            if(this.Staff != null && this.Staff.Defensa != 0)
+            {
+                this.Staff.Desgaste(1);
+            }
             CalcularAtributos();
         }
     }
