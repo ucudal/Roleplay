@@ -101,16 +101,50 @@ namespace Library
             }
             CalculateAttributes();
         }
+        
+        public void Attack(Elf elf)
+        {
+            if(!elf.IsAlive() || !this.IsAlive()) return;
+            elf.ReceiveAttack(this.Damage);
+            //Los items que tengan atributos de ataque se desgastan
+            if(this.SpellBook != null && this.SpellBook.Damage != 0)
+            {
+                this.SpellBook.Deteriorate(1);
+            }
+            foreach(Item item in this.Items)
+            {
+                if(item != null && item.Damage != 0)
+                {
+                    item.Deterioration();
+                }
+            }
+            CalculateAttributes();
+        }
+
+        public void Attack(Duende dwarf)
+        {
+            if(!dwarf.IsAlive() || !this.IsAlive()) return;
+            dwarf.ReceiveAttack(this.Damage);
+            //Los items que tengan atributos de ataque se desgastan
+            if(this.SpellBook != null && this.SpellBook.Damage != 0)
+            {
+                this.SpellBook.Deteriorate(1);
+            }
+            foreach(Item item in this.Items)
+            {
+                if(item != null && item.Damage != 0)
+                {
+                    item.Deterioration();
+                }
+            }
+            CalculateAttributes();
+        }
 
         public void ReceiveAttack(int damage)
         {
             if(!IsAlive()) return;
             this.HP -= damage - this.Defense;
             //Los items que tengan atributos de defensa se desgastan
-            if(this.SpellBook != null && this.SpellBook.Defense != 0)
-            {
-                this.SpellBook.Deteriorate(1);
-            }
             foreach(Item item in this.Items)
             {
                 if(item != null && item.Defense != 0)
