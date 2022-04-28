@@ -5,7 +5,7 @@ namespace Library
 {
     public class Wizard
     {
-        private int InitialHealth {get; set;}
+        public int VidaInicial {get; private set;}
         public int HP {get; set;}
         public int Ataque {get; private set;}
         public int Defensa {get; private set;}
@@ -14,7 +14,7 @@ namespace Library
 
         public Wizard(int hp, int ataque, int defensa)
         {
-            this.InitialHealth = hp;
+            this.VidaInicial = hp;
             this.HP = hp;
             this.Ataque = ataque;
             this.Defensa = defensa;

@@ -148,5 +148,10 @@ namespace Library
                 character.HP -= totalDamage;
             }
         }
+
+        public void PrettyPrint()
+        {
+            Console.WriteLine($"Un elfo con {this.Ataque} puntos de ataque, {this.HP} de vida, y {this.Defensa} de defensa.");
+        }
     }
 }

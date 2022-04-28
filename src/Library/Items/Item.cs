@@ -1,3 +1,5 @@
+using System;
+
 namespace Library
 {
     public class Item
@@ -20,6 +22,11 @@ namespace Library
         public void Desgaste()
         {
             if(!this.EstaRoto()) { this.Durabilidad--; }
+        }
+
+        public void PrettyPrint()
+        {
+            Console.WriteLine($"Este objeto tiene {this.Daño} de daño, {this.Defensa} de defensa y una durabilidad de {this.Durabilidad}");
         }
     }
 }
