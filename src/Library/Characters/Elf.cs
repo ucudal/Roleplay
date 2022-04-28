@@ -66,7 +66,7 @@ namespace Library
             character.HP = Math.Max(amount, character.BaseHP);
         }
 
-        public void Heal(Duende character, int amount)
+        public void Heal(Dwarf character, int amount)
         {
             character.HP = Math.Max(amount, character.BaseHP);
         }
@@ -123,7 +123,7 @@ namespace Library
             }
         }
 
-        public void Attacking(Duende character)
+        public void Attacking(Dwarf character)
         {
             int totalDamage = this.GetAttack() - this.GetDefense();
             if(this.IsAlive() && character.IsAlive()) 
