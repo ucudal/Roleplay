@@ -2,13 +2,13 @@ namespace Library
 {
     public class Spell
     {
-        public int Ataque {get; private set;}
-        public int Defensa {get; private set;}
+        public int Damage {get; private set;}
+        public int Defense {get; private set;}
 
-        public Spell(int ataque, int defensa)
+        public Spell(int damage, int defense)
         {
-            this.Ataque = ataque;
-            this.Defensa = defensa;
+            this.Damage = damage;
+            this.Defense = defense;
         }
 
     }

@@ -2,23 +2,28 @@ namespace Library
 {
     public class SpellBook
     {
-        public int Ataque {get; private set;} = 0;
-        public int Defensa {get; private set;} = 0;
-        public int Durabilidad {get; set;} = 100;
+        public int Damage {get; private set;} = 0;
+        public int Defense {get; private set;} = 0;
+        public int Durability {get; set;}
+
+        public SpellBook(int durability = 100)
+        {
+            this.Durability = durability;
+        }
 
         public void AddSpell(Spell spell)
         {
-            this.Ataque += spell.Ataque;
-            this.Defensa += spell.Defensa;
+            this.Damage += spell.Damage;
+            this.Defense += spell.Defense;
         }
 
-        public bool EstaRoto()
+        public bool IsBroken()
         {
-            return this.Durabilidad <= 0;
+            return this.Durability <= 0;
         }
-        public void Desgaste(int amount)
+        public void Deteriorate(int amount)
         {
-            if(!this.EstaRoto()) { this.Durabilidad--; }
+            if(!this.IsBroken()) this.Durability--;
         }
     }
 }
