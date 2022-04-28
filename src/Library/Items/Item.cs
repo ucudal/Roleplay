@@ -4,29 +4,29 @@ namespace Library
 {
     public class Item
     {
-        public int Daño { get; private set; } = 0;
-        public int Defensa { get; private set; } = 0;
-        public int Durabilidad { get; private set; } = 0;
+        public int Damage { get; private set; } = 0;
+        public int Defense { get; private set; } = 0;
+        public int Durability { get; private set; } = 0;
 
         public Item(int damage, int defense, int durability)
         {
-            this.Daño = damage;
-            this.Defensa = defense;
-            this.Durabilidad = durability;
+            this.Damage = damage;
+            this.Defense = defense;
+            this.Durability = durability;
         }
 
-        public bool EstaRoto()
+        public bool Broken()
         {
-            return this.Durabilidad <= 0;
+            return this.Durability <= 0;
         }
-        public void Desgaste()
+        public void Deterioration()
         {
-            if(!this.EstaRoto()) { this.Durabilidad--; }
+            if(!this.Broken()) { this.Durability--; }
         }
 
         public void PrettyPrint()
         {
-            Console.WriteLine($"Este objeto tiene {this.Daño} de daño, {this.Defensa} de defensa y una durabilidad de {this.Durabilidad}");
+            Console.WriteLine($"Este objeto tiene {this.Damage} de Damage, {this.Defense} de Defense y una Durability de {this.Durability}");
         }
     }
 }

@@ -4,42 +4,42 @@ namespace Library
 {
     public class Elf
     {
-        public string Nombre { get; private set; }
-        public int Ataque { get; private set; } = 0;
-        public int Defensa { get; private set; } = 0;
+        public string Name { get; private set; }
+        public int Damage { get; private set; } = 0;
+        public int Defense { get; private set; } = 0;
         public List<Item> Items { get; private set; } = new List<Item>();
         public int HP { get; set; } = 0;
-        public int VidaInicial { get; private set; } = 0;
+        public int BaseHP { get; private set; } = 0;
 
         public Elf (string name, int attack, int health)
         {
-            this.VidaInicial = health;
-            this.Nombre = name;
-            this.Ataque = attack;
+            this.BaseHP = health;
+            this.Name = name;
+            this.Damage = attack;
             this.HP = health;
         }
 
-        public int GetAtaque()
+        public int GetAttack()
         {
-            int ataqueTotal = this.Ataque;
+            int ataqueTotal = this.Damage;
             foreach(Item item in this.Items) 
             {
-                if(!item.EstaRoto())
+                if(!item.Broken())
                 {
-                    ataqueTotal += item.Daño;
+                    ataqueTotal += item.Damage;
                 } 
             }
             return ataqueTotal;
         }
 
-        public int GetDefensa()
+        public int GetDefense()
         {
-            int defensaTotal = this.Defensa;
+            int defensaTotal = this.Defense;
             foreach(Item item in this.Items) 
             {
-                if(!item.EstaRoto())
+                if(!item.Broken())
                 {
-                    defensaTotal += item.Defensa;
+                    defensaTotal += item.Defense;
                 } 
             }
             return defensaTotal;
@@ -58,38 +58,38 @@ namespace Library
         }
         public void Heal(Elf character, int amount)
         {
-            character.HP = Math.Max(amount, character.VidaInicial);
+            character.HP = Math.Max(amount, character.BaseHP);
         }
 
         public void Heal(Wizard character, int amount)
         {
-            character.HP = Math.Max(amount, character.VidaInicial);
+            character.HP = Math.Max(amount, character.BaseHP);
         }
 
         public void Heal(Duende character, int amount)
         {
-            character.HP = Math.Max(amount, character.VidaInicial);
+            character.HP = Math.Max(amount, character.BaseHP);
         }
 
         public void Attacking(Elf character)
         {
-            int totalDamage = this.GetAtaque() - this.GetDefensa();
+            int totalDamage = this.GetAttack() - this.GetDefense();
             if(this.IsAlive() && character.IsAlive()) 
             {
-                totalDamage = this.Ataque;
+                totalDamage = this.Damage;
                 foreach(Item item in this.Items)
                 {
-                    if(!item.EstaRoto())
+                    if(!item.Broken())
                     {
-                        item.Desgaste();
+                        item.Deterioration();
                     }
                     else { this.RemoveItem(item); }
                 }
                 foreach(Item item in character.Items)
                 {
-                    if(!item.EstaRoto())
+                    if(!item.Broken())
                     {
-                        item.Desgaste();
+                        item.Deterioration();
                     }
                     else { character.RemoveItem(item); }
                 }
@@ -99,23 +99,23 @@ namespace Library
 
         public void Attacking(Wizard character)
         {
-            int totalDamage = this.GetAtaque() - this.GetDefensa();
+            int totalDamage = this.GetAttack() - this.GetDefense();
             if(this.IsAlive() && character.IsAlive()) 
             {
-                totalDamage = this.Ataque;
+                totalDamage = this.Damage;
                 foreach(Item item in this.Items)
                 {
-                    if(!item.EstaRoto())
+                    if(!item.Broken())
                     {
-                        item.Desgaste();
+                        item.Deterioration();
                     }
                     else { this.RemoveItem(item); }
                 }
                 foreach(Item item in character.Items)
                 {
-                    if(!item.EstaRoto())
+                    if(!item.Broken())
                     {
-                        item.Desgaste();
+                        item.Deterioration();
                     }
                     else { character.RemoveItem(item); }
                 }
@@ -125,23 +125,23 @@ namespace Library
 
         public void Attacking(Duende character)
         {
-            int totalDamage = this.GetAtaque() - this.GetDefensa();
+            int totalDamage = this.GetAttack() - this.GetDefense();
             if(this.IsAlive() && character.IsAlive()) 
             {
-                totalDamage = this.Ataque;
+                totalDamage = this.Damage;
                 foreach(Item item in this.Items)
                 {
-                    if(!item.EstaRoto())
+                    if(!item.Broken())
                     {
-                        item.Desgaste();
+                        item.Deterioration();
                     }
                     else { this.RemoveItem(item); }
                 }
                 foreach(Item item in character.Items)
                 {
-                    if(!item.EstaRoto())
+                    if(!item.Broken())
                     {
-                        item.Desgaste();
+                        item.Deterioration();
                     }
                     else { character.RemoveItem(item); }
                 }
@@ -151,7 +151,7 @@ namespace Library
 
         public void PrettyPrint()
         {
-            Console.WriteLine($"Un elfo con {this.Ataque} puntos de ataque, {this.HP} de vida, y {this.Defensa} de defensa.");
+            Console.WriteLine($"Un elfo con {this.Damage} puntos de ataque, {this.HP} de vida, y {this.Defense} de defensa.");
         }
     }
 }
