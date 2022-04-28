@@ -145,6 +145,10 @@ namespace Library
             if(!IsAlive()) return;
             this.HP -= damage - this.Defense;
             //Los items que tengan atributos de defensa se desgastan
+            if(this.SpellBook != null && this.SpellBook.Defense != 0)
+            {
+                this.SpellBook.Deteriorate(1);
+            }
             foreach(Item item in this.Items)
             {
                 if(item != null && item.Defense != 0)
@@ -154,5 +158,7 @@ namespace Library
             }
             CalculateAttributes();
         }
+
+        
     }
 }
