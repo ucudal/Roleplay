@@ -1,24 +1,53 @@
-using System;
-using System.Collections.Generic;
 
 namespace Library
 {
     public class Wizard
     {
-        public int VidaInicial {get; private set;}
+        public int BaseHP {get; private set;}
+        public int BaseAtaque {get; private set;}
+        public int BaseDefensa {get; private set;}
         public int HP {get; set;}
         public int Ataque {get; private set;}
         public int Defensa {get; private set;}
         public SpellBook SpellBook {get; private set;}
-        public List<Item> Items {get;} = new List<Item>();
+        public Staff Staff {get; set;}
 
         public Wizard(int hp, int ataque, int defensa)
         {
-            this.VidaInicial = hp;
+            this.BaseHP = hp;
             this.HP = hp;
-            this.Ataque = ataque;
-            this.Defensa = defensa;
+            this.BaseAtaque = ataque;
+            this.BaseDefensa = defensa;
+            CalcularAtributos();
         }
+
+
+        private void CalcularAtributos()
+        {
+            this.Ataque = this.BaseAtaque;
+            this.Defensa = this.BaseDefensa;
+            if(this.SpellBook != null)
+            {
+                if(this.SpellBook.EstaRoto())
+                {
+                    RemoveSpellBook();
+                    return;
+                }
+                this.Ataque += this.SpellBook.Ataque;
+                this.Defensa += this.SpellBook.Defensa;
+            }
+            if(this.Staff != null)
+            {
+                if(this.Staff.EstaRoto())
+                {
+                    RemoveStaff();
+                    return;
+                }
+                this.Ataque += this.Staff.Ataque;
+                this.Defensa += this.Staff.Defensa;
+            }
+        }
+
 
         public bool IsAlive()
         {
@@ -29,67 +58,61 @@ namespace Library
         {
             if(this.SpellBook != null) RemoveSpellBook();
             this.SpellBook = spellBook;
-            this.Ataque += spellBook.Ataque;
-            this.Defensa += spellBook.Defensa;
+            CalcularAtributos();
         }
 
         public void RemoveSpellBook()
         {
             if(this.SpellBook == null) return;
-            this.Ataque = Math.Max(0, this.Ataque-this.SpellBook.Ataque);
-            this.Defensa = Math.Max(0, this.Defensa-this.SpellBook.Defensa);
-        }      
+            this.SpellBook = null;
+            CalcularAtributos();
+        }     
         
-        public void AddItem(Item item)
+        public void AddStaff(Staff staff)
         {
-            if(this.Items.Contains(item)) return;
-            this.Items.Add(item);
-            this.Ataque += item.Daño;
-            this.Defensa += item.Defensa;
+            if(this.Staff != null) RemoveStaff();
+            this.Staff = staff;
+            CalcularAtributos();
         }
 
-        public void RemoveItem(Item item)
+        public void RemoveStaff()
         {
-            if(!this.Items.Contains(item)) return;
-            this.Items.Remove(item);
-            this.Ataque = Math.Max(0, this.Ataque-item.Daño);
-            this.Defensa = Math.Max(0, this.Defensa-item.Defensa);
-        }
+            if(this.Staff == null) return;
+            this.Staff = null;
+            CalcularAtributos();
+        }      
+        
 
         public void Attack(Wizard wizard)
         {
             if(!wizard.IsAlive() || !this.IsAlive()) return;
-            if(this.SpellBook != null)
+            wizard.ReceiveAttack(this.Ataque);
+            //Los items que tengan atributos de ataque se desgastan
+            if(this.SpellBook != null && this.SpellBook.Ataque != 0)
             {
-                if(this.SpellBook.EstaRoto())
-                {
-                    RemoveSpellBook();
-                }
+                this.SpellBook.Desgaste(1);
             }
-            foreach(Item item in this.Items)
+            if(this.Staff != null && this.Staff.Ataque != 0)
             {
-                if(item.EstaRoto())
-                {
-                    RemoveItem(item);
-                }
+                this.Staff.Desgaste(1);
             }
-            wizard.HP = wizard.HP - this.Ataque;
-            if(this.SpellBook != null)
+            CalcularAtributos();
+        }
+
+        public void ReceiveAttack(int damage)
+        {
+            if(!IsAlive()) return;
+            this.HP -= damage - this.Defensa;
+            //Los items que tengan atributos de defensa se desgastan
+            if(this.SpellBook != null && this.SpellBook.Defensa != 0)
             {
-                this.SpellBook.Durabilidad -= 5;
-                if(this.SpellBook.EstaRoto())
-                {
-                    RemoveSpellBook();
-                }
+                this.SpellBook.Desgaste(1);
             }
-            foreach(Item item in this.Items)
+            if(this.Staff != null && this.Staff.Defensa != 0)
             {
-                item.Desgaste();
-                if(item.EstaRoto())
-                {
-                    RemoveItem(item);
-                }
+                this.Staff.Desgaste(1);
             }
+            CalcularAtributos();
         }
     }
 }
