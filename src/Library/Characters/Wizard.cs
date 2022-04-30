@@ -121,7 +121,7 @@ namespace Library
             CalculateAttributes();
         }
 
-        public void Attack(Duende dwarf)
+        public void Attack(Dwarf dwarf)
         {
             if(!dwarf.IsAlive() || !this.IsAlive()) return;
             dwarf.ReceiveAttack(this.Damage);

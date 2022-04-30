@@ -1,10 +1,10 @@
 using NUnit.Framework;
-
+using Library;
 namespace Test.Library
 {
 
 
-    public class ExampleTest
+    public class DwarfTests
     {
 
         [Test]
