@@ -100,7 +100,7 @@ namespace Library
         {
             // Si el personaje se cura mas de lo que su vida base era, en vez de subirse su vida aun por encima de la
             // base solo se regenera los daños que pudo haber recibido y vuelve a su vida inicial.
-            if(amount + this.HP >= character.BaseHP)
+            if(amount >= character.BaseHP)
             {
                 character.HP = character.BaseHP;
             }
@@ -112,7 +112,7 @@ namespace Library
 
         public void Heal(Undead character, int amount)
         {
-            if(amount + this.HP >= character.BaseHP)
+            if(amount >= character.BaseHP)
             {
                 character.HP = character.BaseHP;
             }
@@ -124,7 +124,7 @@ namespace Library
 
         public void Heal(Dwarf character, int amount)
         {
-            if(amount + this.HP >= character.BaseHP)
+            if(amount >= character.BaseHP)
             {
                 character.HP = character.BaseHP;
             }
@@ -136,7 +136,7 @@ namespace Library
 
         public void Heal(Wizard character, int amount)
         {
-            if(amount + this.HP >= character.BaseHP)
+            if(amount >= character.BaseHP)
             {
                 character.HP = character.BaseHP;
             }

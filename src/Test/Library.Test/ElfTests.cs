@@ -15,7 +15,7 @@ namespace Test.Library
         {
             Elf Gandalf = new Elf("Gandalf", 30, 300, 30);
             Undead Aainz = new Undead("Aainz", 30, 200, 0);
-            Gandalf.Attack(Aainz);
+            Aainz.HP = 170;
             Gandalf.Heal(Aainz, 10);
             Assert.AreEqual(Aainz.HP, 180);
         }
