@@ -29,15 +29,15 @@ namespace Library {
         /// <returns></returns>
         public int GetAttack()
         {
-            int ataqueTotal = this.Damage;
+            int totalAttack = this.Damage;
             foreach(Item item in this.Items) 
             {
                 if(!item.Broken())
                 {
-                    ataqueTotal += item.Damage;
+                    totalAttack += item.Damage;
                 } 
             }
-            return ataqueTotal;
+            return totalAttack;
         }
 
         /// <summary>
@@ -48,15 +48,15 @@ namespace Library {
         /// <returns></returns>
         public int GetDefense()
         {
-            int defensaTotal = this.Defense;
+            int totalDefense = this.Defense;
             foreach(Item item in this.Items) 
             {
                 if(!item.Broken())
                 {
-                    defensaTotal += item.Defense;
+                    totalDefense += item.Defense;
                 } 
             }
-            return defensaTotal;
+            return totalDefense;
         }
 
         /// <summary>
