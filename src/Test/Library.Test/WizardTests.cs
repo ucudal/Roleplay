@@ -3,7 +3,9 @@ using Library;
 
 namespace Test.Library
 {
-
+    /// <summary>
+    /// Clase contenedora de los tests relacionados al personaje Wizard y relativos.
+    /// </summary>
     public class WizardTests
     {
 
