@@ -21,6 +21,12 @@ namespace Library {
             this.BaseHP = health;
         }
 
+        /// <summary>
+        /// Metodo GetAttack se encuentra en la clase Dwarf por expert, ya que quien tiene los conocimientos
+        /// necesarios para obtener el ataque total de Dwarf es la clase Dwarf. Porque conoce su mismo ataque,
+        /// los items y sus ataques.
+        /// </summary>
+        /// <returns></returns>
         public int GetAttack()
         {
             int ataqueTotal = this.Damage;
@@ -34,6 +40,12 @@ namespace Library {
             return ataqueTotal;
         }
 
+        /// <summary>
+        /// Metodo GetDefense se encuentra en la clase Dwarf por expert, ya que quien tiene los conocimientos
+        /// necesarios para obtener la defensa total de Dwarf es la clase Dwarf. Porque conoce su misma defensa,
+        /// los items y sus defensas.
+        /// </summary>
+        /// <returns></returns>
         public int GetDefense()
         {
             int defensaTotal = this.Defense;
@@ -47,6 +59,12 @@ namespace Library {
             return defensaTotal;
         }
 
+        /// <summary>
+        /// Metodo attack que se encarga realizar el ataque de Dwarf a otros personajes, asignada por Expert
+        /// ya que la clase que contiene los conocimientos para calcular el daño que realiza un Dwarf a otro
+        /// personaje es Dwarf. Luego al igual que Heal aplicamos sobrecarga en este metodo.
+        /// </summary>
+        /// <param name="character"></param>
         public void Attack(Elf character)
         {
             int totalDamage = this.GetAttack() - character.GetDefense();
@@ -114,11 +132,22 @@ namespace Library {
             }
         }
 
+        /// <summary>
+        /// Metodo IsAlive designado por Expert, quien es capaz de conocer si Elf esta vivo o no?
+        /// Elf ya que es aquel que conoce la vida de Elf.
+        /// </summary>
+        /// <returns></returns>
         public bool IsAlive()
         {
             return this.HP > 0;
         }
 
+        /// <summary>
+        /// El metodo ReceiveAttack fue asignado a la clase Dwarf por Expert, ya que aquel que a partir
+        /// del daño que pretende hacer un enemigo a un Dwarf puede calcular cuanta vida pierde apartir de 
+        /// este es Dwarf que es quien conoce su propia vida.
+        /// </summary>
+        /// <param name="amount"></param>
         public void ReceiveAttack(int amount)
         {
             foreach(Item item in this.Items)
@@ -132,6 +161,12 @@ namespace Library {
             if(this.HP - amount < 0) { this.HP = 0; }
             else { this.HP -= amount; }
         }
+
+        /// <summary>
+        /// Metodo AddItem asignado por Expert, quien agrega los items a la lista de items de Dwarf,
+        /// aquel que conoce la lista de items de Dwarf, osea la misma clase Dwarf.
+        /// </summary>
+        /// <param name="item"></param>
         public void AddItem (Item item)
         {
             if (!this.Items.Contains(item))
@@ -139,6 +174,12 @@ namespace Library {
                 this.Items.Add(item); 
             }
         }
+
+        /// <summary>
+        /// Metodo RemoveItem asignado por Expert, quien remueve los items a la lista de items de Dwarf,
+        /// aquel que conoce la lista de items de Dwarf, osea la misma clase Dwarf.
+        /// </summary>
+        /// <param name="item"></param>
         public void RemoveItem (Item item)
         {
             if (this.Items.Contains(item))

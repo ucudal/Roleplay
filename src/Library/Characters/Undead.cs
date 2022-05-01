@@ -20,6 +20,12 @@ namespace Library
             this.Damage = attack;
         }
 
+        /// <summary>
+        /// Metodo GetDefense se encuentra en la clase Undead por expert, ya que quien tiene los conocimientos
+        /// necesarios para obtener la defensa total de Undead es la clase Undead. Porque conoce su misma defensa,
+        /// los items y sus defensas.
+        /// </summary>
+        /// <returns></returns>
         public int GetDefense()
         {
             int defensaTotal = this.Defense;
@@ -33,6 +39,12 @@ namespace Library
             return defensaTotal;
         }
 
+        /// <summary>
+        /// Metodo GetAttack se encuentra en la clase Undead por expert, ya que quien tiene los conocimientos
+        /// necesarios para obtener el ataque total de Elf es la clase Undead. Porque conoce su mismo ataque,
+        /// los items y sus ataques.
+        /// </summary>
+        /// <returns></returns>
         public int GetAttack()
         {
             int ataqueTotal = this.Damage;
@@ -46,6 +58,11 @@ namespace Library
             return ataqueTotal;
         }
 
+        /// <summary>
+        /// Metodo AddItem asignado por Expert, quien agrega los items a la lista de items de Undead,
+        /// aquel que conoce la lista de items de Undead, osea la misma clase Undead.
+        /// </summary>
+        /// <param name="item"></param>
         public void AddItem (Item item)
         {
             if (!this.Items.Contains(item))
@@ -53,6 +70,12 @@ namespace Library
                 this.Items.Add(item); 
             }
         }
+
+        /// <summary>
+        /// Metodo RemoveItem asignado por Expert, quien remueve los items a la lista de items de Undead,
+        /// aquel que conoce la lista de items de Undead, osea la misma clase Undead.
+        /// </summary>
+        /// <param name="item"></param>
         public void RemoveItem (Item item)
         {
             if (this.Items.Contains(item))
@@ -61,11 +84,22 @@ namespace Library
             }
         }
 
+        /// <summary>
+        /// Metodo IsAlive designado por Expert, quien es capaz de conocer si Undead esta vivo o no?
+        /// Undead ya que es aquel que conoce la vida de Undead.
+        /// </summary>
+        /// <returns></returns>
         public bool IsAlive()
         {
             return this.HP > 0;
         }
 
+        /// <summary>
+        /// Metodo attack que se encarga realizar el ataque de Undead a otros personajes, asignada por Expert
+        /// ya que la clase que contiene los conocimientos para calcular el daño que realiza un Undead a otro
+        /// personaje es Undead. Luego al igual que Heal aplicamos sobrecarga en este metodo.
+        /// </summary>
+        /// <param name="character"></param>
         public void Attack(Elf character)
         {
             int totalDamage = this.GetAttack() - character.GetDefense();

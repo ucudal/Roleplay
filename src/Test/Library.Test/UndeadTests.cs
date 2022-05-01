@@ -10,7 +10,7 @@ namespace Test.Library
     public class UndeadTests
     {
         [Test]
-        public void BasicAttackTest()
+        public void BasicAttackTest() // Verificamos que el un ataque basico sin items se calcule correctamente.
         {
             Elf Gandalf = new Elf("Gandalf", 120, 300, 0);
             Undead Aainz = new Undead("Aainz", 30, 200, 0); 
@@ -19,7 +19,7 @@ namespace Test.Library
         }
 
         [Test]
-        public void AddItemTest()
+        public void AddItemTest() // Verificamos que se puedan agregar items a la lista de items, y que estos no se vean repetidos.
         {
             Item Sword = new Item(30, 0, 20);
             Item Orb = new Item(30, 0, 20);
@@ -34,7 +34,7 @@ namespace Test.Library
         }
 
         [Test]
-        public void RemoveItemTest()
+        public void RemoveItemTest() // Verificamos que se puedan remover items de la lista de items, y que no surgen excepciones.
         {
             Item Sword = new Item(30, 0, 20);
             Item Orb = new Item(30, 0, 20);
@@ -49,7 +49,7 @@ namespace Test.Library
         }
 
         [Test]
-        public void ComplexAttackTest()
+        public void ComplexAttackTest() // Verificamos que un ataque complejo con items haga el daño conforme a lo esperado.
         {
             Item Sword = new Item(30, 0, 20);
             Item Orb = new Item(30, 0, 20);
@@ -62,7 +62,7 @@ namespace Test.Library
         }
 
         [Test]
-        public void AttackingDeadCharacterTest()
+        public void AttackingDeadCharacterTest() // Verificamos que atacar a un personaje ya muerto no cambie su vida.
         {
             Item Sword = new Item(30, 0, 20);
             Item Orb = new Item(30, 0, 20);
@@ -75,7 +75,7 @@ namespace Test.Library
         }
 
         [Test]
-        public void BreakingItemTest()
+        public void BreakingItemTest() // Verificamos que tras cierta cantidad de usos un item se rompe por agotar su durabilidad.
         {
             Item Sword = new Item(30, 0, 20);
             Item Orb = new Item(30, 0, 30);
