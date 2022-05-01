@@ -79,7 +79,10 @@ namespace Library
         }
         public void RemoveItem (Item item)
         {
-            if (this.Items.Contains(item)) this.Items.Remove(item);
+            if (this.Items.Contains(item)){ 
+                this.Items.Remove(item);
+                CalculateAttributes();
+            }
         }     
         
 
