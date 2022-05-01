@@ -147,7 +147,42 @@ namespace Test.Library
             Assert.AreEqual(0, oz.Items.Count);
             Assert.AreEqual(oz.BaseDamage, oz.Damage);
             Assert.AreEqual(swordBaseDurability-1, sword.Durability);
-        }
+        }      
+        
+        /// <summary>
+        /// Verifica que un libro de hechizos sin hechizos no cambia los atributos del personaje
+        /// </summary>
+        [Test]
+        public void WizardSpellBookWithNoSpellsTest()
+        {
+            Wizard oz = new Wizard(36, 10, 97);
+            SpellBook spellBook = new SpellBook();
+
+            oz.AddSpellBook(spellBook);
+
+            Assert.AreEqual(oz.BaseDamage, oz.Damage);
+            Assert.AreEqual(oz.BaseDefense, oz.Defense);
+            Assert.AreEqual(oz.BaseHP, oz.HP);
+        }   
+
+        /// <summary>
+        /// Verifica que un libro de hechizos con hechizos cambia los atributos del personaje
+        /// </summary>
+        [Test]
+        public void WizardSpellBookWithSpellsTest()
+        {
+            Wizard oz = new Wizard(36, 10, 97);
+            SpellBook spellBook = new SpellBook();
+            
+            spellBook.AddSpell(new Spell(10, 10));
+            oz.AddSpellBook(spellBook);
+
+            Assert.AreEqual(oz.BaseDamage+10, oz.Damage);
+            Assert.AreEqual(oz.BaseDefense+10, oz.Defense);
+            Assert.AreEqual(oz.BaseHP, oz.HP);
+        }  
+
+
 
     }
 
